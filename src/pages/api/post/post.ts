@@ -1,11 +1,4 @@
-import axios from "axios";
-
-const baseURL = `https://gorest.co.in/public/v2`;
-
-const axiosInstance = axios.create({
-  baseURL,
-  // Other configurations like headers, timeouts, etc., can be added here
-});
+import { axiosInstance } from "../axiosApi";
 
 export const fetchData = async (): Promise<any> => {
   try {

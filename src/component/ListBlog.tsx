@@ -19,6 +19,7 @@ import { ReactElement } from "react";
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { fetchData } from "@/pages/api/post/post";
+import CommentsBlog from "./CommentsBlog";
 
 interface IBlogTags {
   tags: Array<string>;
@@ -160,7 +161,7 @@ const ListBlog = () => {
               {post.body}
             </Text>
             <BlogAuthor
-              name={post.author}
+              name={post.id}
               date={new Date("2021-04-06T19:01:27Z")}
             />
           </Box>
@@ -190,6 +191,7 @@ const ListBlog = () => {
           }
         />
       </Flex>
+      <CommentsBlog />
     </Container>
   );
 };
