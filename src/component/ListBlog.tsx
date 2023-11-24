@@ -2,6 +2,7 @@
 import {
   Box,
   Heading,
+  Button,
   Image,
   Text,
   Divider,
@@ -20,6 +21,7 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { fetchData } from "@/pages/api/post/post";
 import CommentsBlog from "./CommentsBlog";
+import { useRouter } from "next/router";
 
 interface IBlogTags {
   tags: Array<string>;
@@ -72,6 +74,7 @@ const ListBlog = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const postsPerPage: number = 1;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -86,7 +89,7 @@ const ListBlog = () => {
     fetchPosts();
   }, []);
 
-  console.log("Post", posts);
+  //console.log("Post", posts);
 
   const handlePageChange = (selectedObject: { selected: number }) => {
     setCurrentPage(selectedObject.selected);
@@ -99,6 +102,7 @@ const ListBlog = () => {
   return (
     <Container maxW={"7xl"} p="12">
       <Heading as="h1">Stories by Chakra Templates</Heading>
+
       <Box
         marginTop={{ base: "1", sm: "5" }}
         display="flex"
@@ -147,7 +151,16 @@ const ListBlog = () => {
             justifyContent="center"
             marginTop={{ base: "3", sm: "0" }}
             key={index}>
-            <BlogTags tags={["Engineering", "Product"]} />
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <BlogTags tags={["Engineering", "Product"]} />
+              <Button
+                marginTop="2"
+                size={"md"}
+                w={"fit-content"}
+                onClick={() => router.push(`/blog/${post.id}`)}>
+                Read More
+              </Button>
+            </Box>
             <Heading marginTop="1">
               <Text textDecoration="none" _hover={{ textDecoration: "none" }}>
                 {post.title}
